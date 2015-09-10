@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+<script type="text/javascript">
+	var test = true;
+	switch(test){
+		case "true":
+			console.log("This is the true in string");
+			break;
+		case (true):
+			console.log("This is the second bol true");
+		default:
+			console.log("This is default");
+			break;
+	}
+
+var app = app || {};
+app.commonMethods = {
+	age  : "10",
+	gender: "Male",
+	name : "computer",
+	printName : function () {
+		console.log(this.name);
+	},
+	printGender : function () {
+		console.log(this.gender);
+	},
+  
+} 
+app.objects = {
+  person : function (name) {
+    this._name = name;
+  }
+}
+app.events = {
+  constructor  : function() {
+    this._listenrs ={};
+  },
+  add_listener: function(type,listener) {
+    if(typeof this.listeners[type] == "undefined") {
+      this._listenrs[type] = [];
+    }
+    this._listenrs[type].push(listener);
+  },
+  fire : function(event) {
+    if (typeof event == "string") {
+      event = {type:event};
+    };
+    if(!event.target) {
+      event.target = this;
+    }
+    if (!event.type) {
+      throw new Error ("Event object mising type peroperty");
+    };
+  }
+}
+app.objects.person.prototype.say_hello = function(){
+  console.log("Hello "+this._name);
+};
+window.onload = function () {
+	app.commonMethods.printName();
+	app.commonMethods.printGender();
+  var firstPerson = new app.objects.person("Hamid");
+  firstPerson.say_hello();
+
+  var studentPerson = 
+}
+</script>
+</head>
+<body></body>
+</html>
